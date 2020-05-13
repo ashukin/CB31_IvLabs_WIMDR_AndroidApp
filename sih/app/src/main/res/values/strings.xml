@@ -11,11 +11,24 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-    <string name ="menu_dashboard">Dashboard</string>
-    <string name ="menu_settings">Settings</string>
-    <string name ="menu_events">Events</string>
-    <string name ="menu_logout">Logout</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_events">Events</string>
+    <string name="menu_logout">Logout</string>
 
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
+
+    <string-array name="gates">
+        <item>Ambazari Gate</item>
+        <item>Bajaj Gate</item>
+        <item>IT Park Gate</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>Today</item>
+        <item>This week</item>
+        <item>This month</item>
+    </string-array>
+
 </resources>

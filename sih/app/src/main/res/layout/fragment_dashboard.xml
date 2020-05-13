@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/spinner_gates"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/search"
+                android:paddingRight="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/notification"
+                android:paddingRight="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/clock"
+                android:paddingRight="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/account"
+                android:paddingRight="20dp"/>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#d3d3d3">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/custom_border">
+
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Overview"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingBottom="10dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_time"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight = "true"
+                android:padding="16dp"/>
+            <TextView
+                android:id="@+id/entries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entries "
+                android:layout_below="@id/overview"
+                android:paddingLeft="26dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/entries"
+                android:layout_below="@+id/overview"
+                android:textColor="@color/red"
+                android:text="+243"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/entries"
+                android:text="2087"
+                android:textSize="24sp"
+                android:paddingLeft="26dp"/>
+
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total "
+                android:layout_below="@id/spinner_time"
+                android:layout_toLeftOf="@+id/total_count"
+                />
+
+            <TextView
+                android:id="@+id/total_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_time"
+                android:text="+140"
+                android:layout_alignParentRight="true"
+                android:paddingRight="16dp"
+                android:textColor="@color/red" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/total"
+                android:text="3184"
+                android:textSize="24sp"
+                android:layout_alignLeft="@+id/total"
+                android:paddingRight="14dp"/>
+
+
+
+            <TextView
+                android:id="@+id/exits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exits "
+                android:layout_below="@id/spinner_time"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/exits_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_time"
+                android:text="-98"
+                android:layout_toRightOf="@+id/exits"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/exits"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:layout_alignLeft="@+id/exits"
+                android:text="2074"
+                android:textSize="24sp" />
+        
+        </RelativeLayout>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>
