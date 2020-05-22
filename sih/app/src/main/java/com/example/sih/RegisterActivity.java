@@ -19,30 +19,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class RegisterActivity extends AppCompatActivity {
 
-    public static int DEKHO ;
+    private static final String TAG = "test";
 
-    EditText name;
-    EditText email;
-    EditText phone;
-    EditText pwd;
-    EditText c_pwd;
+    EditText name,email,phone,pwd,c_pwd;
     ImageView signup;
     TextView login;
-
+    String userID;
 
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore fstore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.v(String.valueOf(RegisterActivity.this),"!!!!!!!!!!!!!!!!!!!Restart karne me value = " + DEKHO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -59,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
 //        toolbar.setTitle(R.string.app_name);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fstore = FirebaseFirestore.getInstance();
 
 //        If the user is already logged in, take him to main activity
         if(firebaseAuth.getCurrentUser() != null) {
@@ -71,9 +75,12 @@ public class RegisterActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = email.getText().toString().trim();
-                String password = pwd.getText().toString().trim();
+                final String mail = email.getText().toString().trim();
+                final String password = pwd.getText().toString().trim();
                 String c_password = c_pwd.getText().toString().trim();
+                final String full_name = name.getText().toString();
+                final String phone_num = phone.getText().toString();
+
 
                 if(TextUtils.isEmpty(mail)) {
                     email.setError("Email is required");
@@ -113,6 +120,28 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Registered Successfully",
                                             Toast.LENGTH_LONG).show();
 
+                                    userID = firebaseAuth.getCurrentUser().getUid();
+
+                                    DocumentReference documentReference = fstore.collection("users").document(userID);
+                                    Map<String,Object> user = new HashMap<>();
+                                    user.put("name", full_name);
+                                    user.put("phone", phone_num);
+                                    user.put("email", mail);
+                                    user.put("pwd",password);
+
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "SUCCESS! USER PROFILE IS CREATED FOR"+userID);
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(TAG, "FAILUrEEEEEEEEE"+e.toString());
+                                        }
+                                    });
+
                                     startActivity(new Intent(RegisterActivity.this,MainActivity.class));
 //                                    finish();
 
@@ -123,7 +152,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
 
                             }
-                        });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Failed to register" + e.toString());
+                    }
+                });
             }
         });
 

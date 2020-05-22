@@ -5,51 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp">
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="horizontal" >
-
-            <Spinner
-                android:id="@+id/spinner_gates"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/search"
-                android:paddingRight="20dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/notification"
-                android:paddingRight="20dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/clock"
-                android:paddingRight="20dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/account"
-                android:paddingRight="20dp"/>
-
-        </LinearLayout>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -73,108 +28,155 @@
                 android:text="Overview"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:paddingTop="16dp"
                 android:paddingLeft="16dp"
                 android:paddingBottom="10dp"/>
 
-            <Spinner
-                android:id="@+id/spinner_time"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentRight = "true"
-                android:padding="16dp"/>
+
+
             <TextView
-                android:id="@+id/entries"
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Entries "
+                android:text="Status of the vehicle : "
                 android:layout_below="@id/overview"
-                android:paddingLeft="26dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/entries"
-                android:layout_below="@+id/overview"
-                android:textColor="@color/red"
-                android:text="+243"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/entries"
-                android:text="2087"
-                android:textSize="24sp"
-                android:paddingLeft="26dp"/>
-
+                android:textSize="18sp"
+                android:paddingLeft="26dp"
+                android:paddingBottom="10dp"/>
 
             <TextView
-                android:id="@+id/total"
+                android:id="@+id/status2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total "
-                android:layout_below="@id/spinner_time"
-                android:layout_toLeftOf="@+id/total_count"
-                />
+                android:text="In the parking lot : "
+                android:textSize="18sp"
+                android:layout_below="@id/status"
+                android:paddingLeft="40dp" />
 
             <TextView
-                android:id="@+id/total_count"
+                android:id="@+id/time_last_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner_time"
-                android:text="+140"
-                android:layout_alignParentRight="true"
-                android:paddingRight="16dp"
-                android:textColor="@color/red" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/total"
-                android:text="3184"
-                android:textSize="24sp"
-                android:layout_alignLeft="@+id/total"
-                android:paddingRight="14dp"/>
+                android:text="Time of last entry/exit : "
+                android:textSize="18sp"
+                android:layout_below="@id/status2"
+                android:paddingLeft="40dp" />
 
-
-
-            <TextView
-                android:id="@+id/exits"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Exits "
-                android:layout_below="@id/spinner_time"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:id="@+id/exits_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner_time"
-                android:text="-98"
-                android:layout_toRightOf="@+id/exits"
-                android:textColor="@color/red" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/exits"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="1dp"
-                android:layout_alignLeft="@+id/exits"
-                android:text="2074"
-                android:textSize="24sp" />
         
         </RelativeLayout>
 
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/custom_border">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/spinner_time"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:padding="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp">
+
+                <ScrollView
+                    android:id="@+id/layout"
+                    android:layout_height="match_parent"
+                    android:scrollbars="horizontal|vertical"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dip"
+                    android:scrollbarStyle="outsideInset"
+                    android:fillViewport="true">
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalView"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal|vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dip">
+
+                <TableLayout
+                    android:id="@+id/tabla_cuerpo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:id="@+id/tableRow1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/from_loc"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:padding="5dp"
+                            android:text="From"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/to_loc"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:padding="5dp"
+                            android:text="To"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/veh_type"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Vehicle type" />
+
+                        <TextView
+                            android:id="@+id/veh_num"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Vehicle no." />
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Date" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_layout"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Time" />
+
+                    </TableRow>
+                </TableLayout>
+                </HorizontalScrollView>
+                </ScrollView>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+
 
 
 

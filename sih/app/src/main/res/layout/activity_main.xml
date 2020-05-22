@@ -19,6 +19,42 @@
             android:layout_height="?attr/actionBarSize"
             android:elevation="4dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/find"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/search"
+                    android:paddingRight="20dp"
+                    android:layout_toLeftOf="@+id/notif_shortcut"/>
+
+                <ImageView
+                    android:id="@+id/notif_shortcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/notification"
+                    android:paddingRight="20dp"
+                    android:layout_toLeftOf="@+id/cal_shortcut"/>
+
+                <ImageView
+                    android:id="@+id/cal_shortcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/clock"
+                    android:paddingRight="20dp"
+                    android:layout_toLeftOf="@+id/profile_shortcut"/>
+                <ImageView
+                    android:id="@+id/profile_shortcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/account"
+                    android:paddingRight="20dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
 
 
         </androidx.appcompat.widget.Toolbar>

@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener,EntriesFragment.OnFragmentInteractionListener, ExitsFragment.OnFragmentInteractionListener{
+public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     @Nullable
     @Override
@@ -25,12 +25,12 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
 
 
-        // Creating spinner for gates
-        Spinner spinner = view.findViewById(R.id.spinner_gates);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gates, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+//        // Creating spinner for gates
+//        Spinner spinner = view.findViewById(R.id.spinner_gates);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gates, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
+//        spinner.setOnItemSelectedListener(this);
 
         // Spinner for showing data of that time
         Spinner time_s = view.findViewById(R.id.spinner_time);
@@ -39,22 +39,6 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         time_s.setAdapter(adapter_t);
         time_s.setOnItemSelectedListener(this);
 
-
-
-
-        // Find the view pager that will allow the user to swipe between fragments
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-
-        // Create an adapter that knows which fragment should be shown on each page
-        PagerAdapter adapter_p = new PagerAdapter(getChildFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter_p);
-
-
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = view.findViewById(R.id.tablayout);
-        tabLayout.setupWithViewPager(viewPager);
 
 
         return view;

@@ -17,9 +17,15 @@
             android:icon="@drawable/events"
             android:title="@string/menu_events"/>
         <item
+            android:id="@+id/profile"
+            android:icon="@drawable/account_white"
+            android:title="Profile"/>
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
             android:title="@string/menu_logout"/>
+
+
 
 
 

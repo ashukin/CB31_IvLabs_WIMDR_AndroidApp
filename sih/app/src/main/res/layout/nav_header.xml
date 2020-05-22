@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:background="#607D8B"
+    android:background="@color/gray"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Falcon Vision"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
 
-</LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/drawer_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/robert"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFFFFF"
+            />
+
+        <TextView
+            android:id="@+id/drawer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Robert Downey Jr."
+            android:layout_toRightOf="@id/drawer_img"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"/>
+
+<!--        <TextView-->
+<!--            android:id="@+id/go_to_profile_link"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="View and edit profile"-->
+<!--            android:textSize="15sp"-->
+<!--            android:layout_below="@id/img"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="20dp"/>-->
+
+
+</RelativeLayout>
