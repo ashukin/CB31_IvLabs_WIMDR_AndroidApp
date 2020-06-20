@@ -14,7 +14,7 @@
             android:id="@+id/drawer_img"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/robert"
+            android:src="@drawable/profile"
             app:civ_border_width="2dp"
             app:civ_border_color="#FFFFFF"
             />
