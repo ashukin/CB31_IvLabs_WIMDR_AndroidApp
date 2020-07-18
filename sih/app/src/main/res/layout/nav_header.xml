@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="260dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:background="@color/gray"
-    android:padding="16dp">
+    android:padding="30dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -16,7 +16,7 @@
             android:layout_height="120dp"
             android:src="@drawable/profile"
             app:civ_border_width="2dp"
-            app:civ_border_color="#FFFFFF"
+            app:civ_border_color="@color/white"
             />
 
         <TextView
@@ -24,20 +24,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="Robert Downey Jr."
-            android:layout_toRightOf="@id/drawer_img"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"/>
+            android:text="User name"
+            android:textStyle="bold"
+            android:paddingTop="20dp"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/go_to_profile_link"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="View and edit profile"-->
-<!--            android:textSize="15sp"-->
-<!--            android:layout_below="@id/img"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_marginTop="20dp"/>-->
+        <TextView
+            android:id="@+id/drawer_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="User email" />
 
 
-</RelativeLayout>
+</LinearLayout>

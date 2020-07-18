@@ -13,6 +13,8 @@ android {
         versionName "1.0"
         multiDexEnabled true
 
+        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -51,4 +53,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.4.1'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
 }

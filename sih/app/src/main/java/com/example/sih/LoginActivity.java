@@ -27,8 +27,6 @@ import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static int DEKHO = 1;
-
     EditText email;
     EditText pwd;
     ImageView login;
@@ -42,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Log.v(String.valueOf(LoginActivity.this),"!!!!!!!!!!!!!!!!!!!ekdm starting me value = " + DEKHO);
-
         email = findViewById(R.id.email_login);
         pwd = findViewById(R.id.pwd_login);
         login = findViewById(R.id.login);
@@ -52,10 +48,16 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+//        If the user is already logged in, take him to main activity
+        if(firebaseAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v(String.valueOf(LoginActivity.this),"" + "!!!!!!!!!!!!!!!!!Login karne k baad value = " + DEKHO);
+
 
                 String mail = email.getText().toString().trim();
                 String password = pwd.getText().toString().trim();
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
-//                            finish();
+                            finish();
                         }else {
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 

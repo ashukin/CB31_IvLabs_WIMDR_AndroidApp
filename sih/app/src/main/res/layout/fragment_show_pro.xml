@@ -11,9 +11,19 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
 
+        <ImageView
+            android:id="@+id/edit_profile_pen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/pen_white"
+            android:tint = "@color/black"
+            android:layout_margin="10dp" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_pic"
+            android:id="@+id/show_profile_pic"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/profile"
@@ -21,33 +31,26 @@
             app:civ_border_color="@color/black"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="5dp"
-            android:src="@drawable/pen_white"
-            android:background="@drawable/magnitude_circle"
-            android:layout_alignBottom="@id/profile_pic"
-            android:layout_alignRight="@id/profile_pic"/>
 
-        <EditText
-            android:id="@+id/profile_name"
+
+        <TextView
+            android:id="@+id/show_pro_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_pic"
+            android:layout_below="@+id/show_profile_pic"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="Robert Downey Jr."
+            android:text="User name"
             android:textColor="@color/black"
             android:textSize="32sp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_name"
+            android:layout_below="@+id/show_pro_name"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
             android:text="India"
@@ -85,13 +88,14 @@
                     android:textColor="@color/headings"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/pro_email"
+                <TextView
+                    android:id="@+id/show_pro_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:paddingBottom="15dp"/>
 
 
             </LinearLayout>
@@ -109,54 +113,16 @@
                     android:textColor="@color/headings"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/pro_phone"
+                <TextView
+                    android:id="@+id/show_pro_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:paddingBottom="15dp"/>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Password"
-                    android:textColor="@color/headings"
-                    android:textSize="15sp" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true"
-                    android:textColorHint="@color/gray">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/pro_pwd"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:ems="10"
-                        android:textSize="18sp"
-                        android:textColor="#000000"
-                        android:inputType="textPassword" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/save_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SAVE"/>
 
         </LinearLayout>
 

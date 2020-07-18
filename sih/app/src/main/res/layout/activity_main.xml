@@ -23,6 +23,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
+                <TextView
+                    android:id="@+id/title_top"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:text = "Dashboard"
+                    android:textColor="@color/black"
+                    android:textSize="21sp"/>
+
                 <ImageView
                     android:id="@+id/find"
                     android:layout_width="wrap_content"
@@ -44,13 +54,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/clock"
-                    android:paddingRight="20dp"
-                    android:layout_toLeftOf="@+id/profile_shortcut"/>
-                <ImageView
-                    android:id="@+id/profile_shortcut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/account"
                     android:paddingRight="20dp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
@@ -76,6 +79,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity = "start"
+        app:itemIconTint="@color/drawer_item"
+        app:itemTextColor="@color/drawer_item"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"/>
 

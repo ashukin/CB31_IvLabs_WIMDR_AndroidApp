@@ -65,10 +65,10 @@ public class RegisterActivity extends AppCompatActivity {
         fstore = FirebaseFirestore.getInstance();
 
 //        If the user is already logged in, take him to main activity
-        if(firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-            finish();
-        }
+//        if(firebaseAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+//            finish();
+//        }
 
 
 

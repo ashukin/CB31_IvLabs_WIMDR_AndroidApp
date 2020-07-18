@@ -126,6 +126,10 @@ public class ProfileFragment extends Fragment {
                         docRef.update(edited);
 
                         Toast.makeText(getActivity(),"Saved", Toast.LENGTH_SHORT).show();
+
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ShowProFragment()).commit();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

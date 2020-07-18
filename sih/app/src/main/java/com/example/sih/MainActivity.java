@@ -1,11 +1,13 @@
 package com.example.sih;
 
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -16,6 +18,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,9 +56,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     public static int DEKHO ;
 
-    TextView name;
+    TextView name, title, email;
     String userID;
-    ImageView img;
+    ImageView img, notif;
 
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
@@ -80,7 +85,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         name   = (TextView)navigationView.getHeaderView(0).findViewById(R.id.drawer_name);
+        email = navigationView.getHeaderView(0).findViewById(R.id.drawer_email);
         img = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.drawer_img);
+
+
+        notif = findViewById(R.id.notif_shortcut);
+        title = findViewById(R.id.title_top);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);
@@ -93,15 +103,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.dashboard);
         }
 
+
         final DocumentReference documentReference = fstore.collection("users").document(userID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                name.setText(documentSnapshot.getString("name"));
+                if (e!=null){
+                    Log.d("Errororooror","Error:"+e.getMessage());
+                }
+                else {
+                    name.setText(documentSnapshot.getString("name"));
+                    email.setText(documentSnapshot.getString("email"));
+                }
 
             }
         });
 
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ShowProFragment()).commit();
+
+                title.setText("Profile");
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder notif = new AlertDialog.Builder(MainActivity.this);
+                String l1 = "ALERT MESSAGE";
+                String l2 = "Your vehicle had passed through :";
+
+                notif.setMessage(l1 + "\n" + "\n" + l2 );
+
+                notif.setNegativeButton("Report", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // call police
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "100"));
+                        startActivity(intent);
+                    }
+                });
+
+                notif.setPositiveButton("Ignore", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //ignore
+
+                    }
+                });
+
+                notif.create().show();
+            }
+        });
 
         StorageReference profileRef = FirebaseStorage.getInstance().getReference("profilepics/"+ userID + ".jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -112,33 +170,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-
-//        //Go to your specific database directory or Child
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
-//
-//        //Connect the views of navigation bar
-//        name   = (TextView)navigationView.getHeaderView(0).findViewById(R.id.drawer_name);
-//        img = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.drawer_img);
-//
-//        //Use you DB reference object and add this method to access realtime data
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                //Fetch values from you database child and set it to the specific view object.
-//                name.setText(dataSnapshot.child("name").getValue().toString());
-//
-//                String link =dataSnapshot.child("profilepics").getValue().toString();
-//                Picasso.with(getBaseContext()).load(link).into(img);
-//            }
-//
-//            //SIMPLE BRO. HAVE FUN IN ANDROID <3 GOOD LUCK
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
 
 
@@ -154,21 +185,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.dashboard:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DashboardFragment()).commit();
+                title.setText("Dashboard");
                 break;
 
             case R.id.settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
-
-                break;
-
-            case R.id.events:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new EventsFragment()).commit();
+                title.setText("Settings");
 
                 break;
 
             case R.id.logout:
+
+//                setTextColorForMenuItem(item, R.color.blue);
 
                 final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 alert.setMessage("Are you sure?");
@@ -177,7 +206,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
+
                         startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                        finish();
                     }
                 });
 
@@ -192,11 +223,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
 
-            case R.id.profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ProfileFragment()).commit();
-
-                break;
 
 
         }
@@ -205,15 +231,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
+//    private void setTextColorForMenuItem(MenuItem menuItem, @ColorRes int color) {
+//        SpannableString spanString = new SpannableString(menuItem.getTitle().toString());
+//        spanString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, color)), 0, spanString.length(), 0);
+//        menuItem.setTitle(spanString);
+//    }
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else {
-            Intent a = new Intent(Intent.ACTION_MAIN);
-            a.addCategory(Intent.CATEGORY_HOME);
-            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(a);
+            final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+            alert.setMessage("Do you want to exit?");
+
+            alert.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent a = new Intent(Intent.ACTION_MAIN);
+                    a.addCategory(Intent.CATEGORY_HOME);
+                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(a);
+                }
+            });
+
+            alert.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // close the dialog
+                }
+            });
+
+            alert.create().show();
+
         }
 
     }
