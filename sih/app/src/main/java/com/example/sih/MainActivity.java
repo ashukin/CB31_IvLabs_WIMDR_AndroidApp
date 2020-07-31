@@ -187,6 +187,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new DashboardFragment()).commit();
                 title.setText("Dashboard");
                 break;
+            case R.id.payments:
+                startActivity(new Intent(MainActivity.this, PaymentsActivity.class));
+                break;
 
             case R.id.settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -195,6 +198,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
 
+            case R.id.notice:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NoticeFragment()).commit();
+                title.setText("Notices");
+
+                break;
             case R.id.logout:
 
 //                setTextColorForMenuItem(item, R.color.blue);

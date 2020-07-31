@@ -39,7 +39,7 @@ public class ShowProFragment extends Fragment {
 
 
     ImageView pro_pic, edit_profile;
-    TextView pro_name, pro_email, pro_phone;
+    TextView pro_name, pro_email, pro_phone, pro_v_type, pro_v_num;
 
 
     FirebaseAuth mAuth;
@@ -56,6 +56,9 @@ public class ShowProFragment extends Fragment {
         pro_name = view.findViewById(R.id.show_pro_name);
         pro_email = view.findViewById(R.id.show_pro_email);
         pro_phone = view.findViewById(R.id.show_pro_phone);
+        pro_v_type = view.findViewById(R.id.show_pro_v_type);
+        pro_v_num = view.findViewById(R.id.show_pro_v_num);
+
         mAuth = FirebaseAuth.getInstance();
 
         edit_profile = (ImageView) view.findViewById(R.id.edit_profile_pen);
@@ -82,6 +85,8 @@ public class ShowProFragment extends Fragment {
                 pro_phone.setText(documentSnapshot.getString("phone"));
                 pro_name.setText(documentSnapshot.getString("name"));
                 pro_email.setText(documentSnapshot.getString("email"));
+                pro_v_type.setText(documentSnapshot.getString("veh_type"));
+                pro_v_num.setText(documentSnapshot.getString("veh_num"));
 
             }
         });

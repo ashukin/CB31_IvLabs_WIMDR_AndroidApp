@@ -3,14 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:background="#ECEFF1">
 
 
     <androidx.cardview.widget.CardView
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,12 +33,12 @@
                 android:layout_height="wrap_content"
                 android:text="Add User"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add upto 4 users"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -47,7 +46,9 @@
     <androidx.cardview.widget.CardView
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -70,12 +71,12 @@
                 android:layout_height="wrap_content"
                 android:text="Add Vehicle"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add upto 2 vehicles"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -83,7 +84,9 @@
     <androidx.cardview.widget.CardView
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -106,12 +109,8 @@
                 android:layout_height="wrap_content"
                 android:text="Activity log"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="15sp"/>
+                android:textSize="16sp" />
+            
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -119,7 +118,9 @@
     <androidx.cardview.widget.CardView
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -142,12 +143,12 @@
                 android:layout_height="wrap_content"
                 android:text="Enable notification"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Default (Off) "
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -155,37 +156,77 @@
     <androidx.cardview.widget.CardView
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:layout_margin="5dp">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/change_theme"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingLeft="25dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Change Theme"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Default (Light)"
-                android:textSize="15sp"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/change_theme"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Change Theme"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Default (Light)"
+                    android:textSize="13sp"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/mode"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/black"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mode Configuration"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Moderate Alert, No ALert"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

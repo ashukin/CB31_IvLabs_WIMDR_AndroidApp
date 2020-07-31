@@ -20,6 +20,14 @@
             android:icon="@drawable/starred"
             android:title="Starred" />
         <item
+            android:id="@+id/notice"
+            android:icon="@drawable/message"
+            android:title="Notices" />
+        <item
+            android:id="@+id/payments"
+            android:icon="@drawable/payment"
+            android:title="Payments" />
+        <item
             android:id="@+id/settings"
             android:icon="@drawable/settings"
             android:title="@string/menu_settings"/>

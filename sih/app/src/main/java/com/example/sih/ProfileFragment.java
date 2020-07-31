@@ -46,7 +46,7 @@ public class ProfileFragment extends Fragment {
 
     Uri uriProfileImage;
     ImageView pro_pic, drawer_img;
-    EditText pro_name, pro_email, pro_phone, pro_pwd;
+    EditText pro_name, pro_email, pro_phone, pro_pwd, pro_v_type, pro_v_num;
     String profileImageUrl;
     Button save;
 
@@ -67,6 +67,9 @@ public class ProfileFragment extends Fragment {
         pro_email = view.findViewById(R.id.pro_email);
         pro_phone = view.findViewById(R.id.pro_phone);
         pro_pwd = view.findViewById(R.id.pro_pwd);
+        pro_v_type=view.findViewById(R.id.pro_v_type);
+        pro_v_num = view.findViewById(R.id.pro_v_num);
+
         mAuth = FirebaseAuth.getInstance();
         save = view.findViewById(R.id.save_profile);
 
@@ -92,6 +95,8 @@ public class ProfileFragment extends Fragment {
                 pro_name.setText(documentSnapshot.getString("name"));
                 pro_email.setText(documentSnapshot.getString("email"));
                 pro_pwd.setText(documentSnapshot.getString("pwd"));
+                pro_v_type.setText(documentSnapshot.getString("veh_type"));
+                pro_v_num.setText(documentSnapshot.getString("veh_num"));
 
             }
         });
@@ -123,6 +128,8 @@ public class ProfileFragment extends Fragment {
                         edited.put("email", email);
                         edited.put("name", pro_name.getText().toString());
                         edited.put("phone", pro_phone.getText().toString());
+                        edited.put("veh_type",pro_v_type.getText().toString());
+                        edited.put("veh_num",pro_v_num.getText().toString());
                         docRef.update(edited);
 
                         Toast.makeText(getActivity(),"Saved", Toast.LENGTH_SHORT).show();

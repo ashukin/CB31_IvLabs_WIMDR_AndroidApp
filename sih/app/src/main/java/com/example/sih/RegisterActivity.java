@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "test";
 
-    EditText name,email,phone,pwd,c_pwd;
+    EditText name,email,phone,pwd,c_pwd,v_type, v_num;
     ImageView signup;
     TextView login;
     String userID;
@@ -57,6 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
         c_pwd = findViewById(R.id.confirm_pwd);
         signup = findViewById(R.id.register);
         login = findViewById(R.id.login_link);
+        v_type=findViewById(R.id.veh_type);
+        v_num = findViewById(R.id.veh_num);
 
 
 //        toolbar.setTitle(R.string.app_name);
@@ -80,6 +82,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String c_password = c_pwd.getText().toString().trim();
                 final String full_name = name.getText().toString();
                 final String phone_num = phone.getText().toString();
+                final String veh_type = v_type.getText().toString();
+                final String veh_num = v_num.getText().toString();
+
 
 
                 if(TextUtils.isEmpty(mail)) {
@@ -128,6 +133,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     user.put("phone", phone_num);
                                     user.put("email", mail);
                                     user.put("pwd",password);
+                                    user.put("veh_type",veh_type);
+                                    user.put("veh_num",veh_num);
 
                                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

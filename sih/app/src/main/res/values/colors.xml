@@ -14,6 +14,10 @@
     <color name="light_gray">#E5E5E5</color>
     <color name="dark_blue">#333BFF</color>
 
+    <color name="red_covid">#FF073A</color>
+    <color name="green_covid">#28A745</color>
+    <color name="blue_covid">#007BFF</color>
+
 
     <color name="solidCircle">#AAFFFFFF</color>
     <color name="circleBorder">#50FFFFFF</color>
