@@ -1,11 +1,10 @@
-package com.example.sih;
+package com.example.falcon_vision;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -87,7 +83,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        final DocumentReference documentReference = fstore.collection("users").document(userID);
+        final DocumentReference documentReference = fstore.collection("reg_users").document(userID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -95,7 +91,7 @@ public class ProfileFragment extends Fragment {
                 pro_name.setText(documentSnapshot.getString("name"));
                 pro_email.setText(documentSnapshot.getString("email"));
                 pro_pwd.setText(documentSnapshot.getString("pwd"));
-                pro_v_type.setText(documentSnapshot.getString("veh_type"));
+                pro_v_type.setText(documentSnapshot.getString("veh_model"));
                 pro_v_num.setText(documentSnapshot.getString("veh_num"));
 
             }
@@ -123,13 +119,13 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        DocumentReference docRef = fstore.collection("users").document(user.getUid());
+                        DocumentReference docRef = fstore.collection("reg_users").document(user.getUid());
                         Map<String,Object> edited = new HashMap<>();
                         edited.put("email", email);
                         edited.put("name", pro_name.getText().toString());
                         edited.put("phone", pro_phone.getText().toString());
                         edited.put("veh_type",pro_v_type.getText().toString());
-                        edited.put("veh_num",pro_v_num.getText().toString());
+                        edited.put("veh_num",pro_v_num.getText().toString().toUpperCase());
                         docRef.update(edited);
 
                         Toast.makeText(getActivity(),"Saved", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.sih;
+package com.example.falcon_vision;
 
 
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +18,8 @@ import androidx.fragment.app.Fragment;
 
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -30,7 +27,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 
@@ -78,14 +74,14 @@ public class ShowProFragment extends Fragment {
             }
         });
 
-        final DocumentReference documentReference = fstore.collection("users").document(userID);
+        final DocumentReference documentReference = fstore.collection("reg_users").document(userID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 pro_phone.setText(documentSnapshot.getString("phone"));
                 pro_name.setText(documentSnapshot.getString("name"));
                 pro_email.setText(documentSnapshot.getString("email"));
-                pro_v_type.setText(documentSnapshot.getString("veh_type"));
+                pro_v_type.setText(documentSnapshot.getString("veh_model"));
                 pro_v_num.setText(documentSnapshot.getString("veh_num"));
 
             }

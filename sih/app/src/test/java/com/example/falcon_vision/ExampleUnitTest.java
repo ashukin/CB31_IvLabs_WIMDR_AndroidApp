@@ -1,4 +1,4 @@
-package com.example.sih;
+package com.example.falcon_vision;
 
 import org.junit.Test;
 

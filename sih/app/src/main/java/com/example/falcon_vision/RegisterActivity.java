@@ -1,18 +1,14 @@
-package com.example.sih;
+package com.example.falcon_vision;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,10 +20,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,10 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         pwd = findViewById(R.id.pwd);
         c_pwd = findViewById(R.id.confirm_pwd);
-        signup = findViewById(R.id.register);
+        signup = findViewById(R.id.register_1);
         login = findViewById(R.id.login_link);
-        v_type=findViewById(R.id.veh_type);
-        v_num = findViewById(R.id.veh_num);
 
 
 //        toolbar.setTitle(R.string.app_name);
@@ -82,8 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String c_password = c_pwd.getText().toString().trim();
                 final String full_name = name.getText().toString();
                 final String phone_num = phone.getText().toString();
-                final String veh_type = v_type.getText().toString();
-                final String veh_num = v_num.getText().toString();
 
 
 
@@ -127,14 +119,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     userID = firebaseAuth.getCurrentUser().getUid();
 
-                                    DocumentReference documentReference = fstore.collection("users").document(userID);
+                                    DocumentReference documentReference = fstore.collection("reg_users").document(userID);
                                     Map<String,Object> user = new HashMap<>();
                                     user.put("name", full_name);
                                     user.put("phone", phone_num);
                                     user.put("email", mail);
                                     user.put("pwd",password);
-                                    user.put("veh_type",veh_type);
-                                    user.put("veh_num",veh_num);
 
                                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -149,8 +139,9 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     });
 
-                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-//                                    finish();
+                                    Intent i = new Intent(RegisterActivity.this, RegisterActivity2.class);
+                                    i.putExtra( "key", (Serializable) user);
+                                    startActivity(i);
 
                                 }else{
                                     Toast.makeText(RegisterActivity.this, task.getException().getMessage(),
