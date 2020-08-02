@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     TextView name, title, email;
     String userID;
-    ImageView img, notif;
+    ImageView img, notif, scanner;
 
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         email = navigationView.getHeaderView(0).findViewById(R.id.drawer_email);
         img = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.drawer_img);
 
-
+        scanner =findViewById(R.id.scanner_today);
         notif = findViewById(R.id.notif_shortcut);
         title = findViewById(R.id.title_top);
 
@@ -141,6 +141,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
                 notif.create().show();
+            }
+        });
+
+        scanner.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Scanner.class));
             }
         });
 

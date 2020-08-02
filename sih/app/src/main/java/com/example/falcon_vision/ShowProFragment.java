@@ -55,7 +55,6 @@ public class ShowProFragment extends Fragment {
         pro_v_type = view.findViewById(R.id.show_pro_v_type);
         pro_v_num = view.findViewById(R.id.show_pro_v_num);
 
-        mAuth = FirebaseAuth.getInstance();
 
         edit_profile = (ImageView) view.findViewById(R.id.edit_profile_pen);
 

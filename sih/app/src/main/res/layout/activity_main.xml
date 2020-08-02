@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,16 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/search"
                     android:paddingRight="20dp"
-                    android:layout_toLeftOf="@+id/notif_shortcut"/>
+                    android:layout_toLeftOf="@+id/scanner_today"/>
+                <ImageView
+                    android:id="@+id/scanner_today"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/scanner"
+                    android:layout_marginRight="20dp"
+                    android:padding="15dp"
+                    android:layout_toLeftOf="@+id/notif_shortcut"
+                    android:scaleType="centerCrop"/>
 
                 <ImageView
                     android:id="@+id/notif_shortcut"
@@ -65,11 +74,10 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
 
         </FrameLayout>
-
 
 
     </LinearLayout>

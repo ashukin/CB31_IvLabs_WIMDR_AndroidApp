@@ -7,9 +7,11 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -20,6 +22,8 @@ public class ModeConfigFragment extends Fragment {
 
     SwitchCompat mod_alert, no_alert;
     EditText time_mod_to, time_mod_from;
+    static Boolean mod_on = false, no_alert_on = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,6 +32,44 @@ public class ModeConfigFragment extends Fragment {
 
         mod_alert = view.findViewById(R.id.switch_moderate);
         no_alert = view.findViewById(R.id.switch_noalert);
+
+        mod_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (mod_on) {
+                    mod_on = false;
+                }
+                else
+                {
+                    mod_on=true;
+                    if(no_alert_on){
+                        no_alert.toggle();
+                    }
+                }
+                Log.d("isTouched!!!!!!!)!)! = ", String.valueOf(mod_on));
+            }
+        });
+
+        no_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (no_alert_on) {
+                    no_alert_on = false;
+                }
+                else
+                {
+                    no_alert_on=true;
+                    if(mod_on){
+                        mod_alert.toggle();
+                    }
+                }
+                Log.d("isTouched!!!!!!!)!)! = ", String.valueOf(mod_on));
+            }
+        });
 
         time_mod_from = view.findViewById(R.id.mod_from);
         time_mod_to = view.findViewById(R.id.mod_to);
@@ -72,9 +114,9 @@ public class ModeConfigFragment extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         if(selectedMinute==00){
-                            time_mod_from.setText( selectedHour + ":" + selectedMinute+0);
+                            time_mod_to.setText( selectedHour + ":" + selectedMinute+0);
                         }else {
-                            time_mod_from.setText(selectedHour + ":" + selectedMinute);
+                            time_mod_to.setText(selectedHour + ":" + selectedMinute);
                         }
                     }
                 }, hour, minute, true);//Yes 24 hour time

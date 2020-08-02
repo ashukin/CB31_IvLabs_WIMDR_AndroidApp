@@ -41,9 +41,6 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         tabLayout.setupWithViewPager(viewPager);
 
 
-
-
-
         return view;
     }
 
