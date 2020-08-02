@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,8 +34,11 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -47,10 +52,12 @@ public class RegisterActivity2 extends AppCompatActivity {
     ImageView signup, car_f,car_b,num_plate;
     TextView login;
     String userID;
-    int i =0;
+    int i =0, c=0;
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore fstore;
+    final Calendar myCalendar = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,19 +76,9 @@ public class RegisterActivity2 extends AppCompatActivity {
         login = findViewById(R.id.login_link);
 
 
-
-
-
-//        toolbar.setTitle(R.string.app_name);
-
         firebaseAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
-//        If the user is already logged in, take him to main activity
-//        if(firebaseAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-//            finish();
-//        }
         final Map<String,Object> user = (Map<String, Object>) getIntent().getSerializableExtra("key");
 
         car_f.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +86,8 @@ public class RegisterActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 i=0;
                 showImageChooser();
+                c+=1;
+
 
             }
         });
@@ -97,6 +96,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 i=1;
                 showImageChooser();
+                c+=1;
 
             }
         });
@@ -105,6 +105,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 i=2;
                 showImageChooser();
+                c+=1;
 
             }
         });
@@ -115,7 +116,6 @@ public class RegisterActivity2 extends AppCompatActivity {
                 final String veh_dop = v_dop.getText().toString();
                 final String veh_model = v_model.getText().toString();
                 final String veh_num = v_num.getText().toString();
-
 
                 userID = firebaseAuth.getCurrentUser().getUid();
 
@@ -137,7 +137,18 @@ public class RegisterActivity2 extends AppCompatActivity {
                         Log.d(TAG, "FAILUrEEEEEEEEE"+e.toString());
                     }
                 });
-                startActivity(new Intent(RegisterActivity2.this,MainActivity.class));
+
+                if(c==3) {
+
+                    startActivity(new Intent(RegisterActivity2.this, MainActivity.class));
+                    Toast.makeText(RegisterActivity2.this, "Registered Successfully",
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(RegisterActivity2.this, "Upload all the images to register",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
 
 
             }
@@ -151,6 +162,31 @@ public class RegisterActivity2 extends AppCompatActivity {
             }
         });
 
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        v_dop.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(RegisterActivity2.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
 
 
@@ -225,5 +261,12 @@ public class RegisterActivity2 extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), CHOOSE_IMAGE);
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        v_dop.setText(sdf.format(myCalendar.getTime()));
     }
 }

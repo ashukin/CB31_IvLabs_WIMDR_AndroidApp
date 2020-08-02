@@ -3,59 +3,38 @@ package com.example.falcon_vision;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 
-/**
+public class ModeConfigFragment extends Fragment {
 
- */
-public class TodayFragment extends Fragment {
-
-
-    SwitchCompat switch_button;
-    EditText vig_from, vig_to;
-    static Boolean vig_on = false;
-
+    SwitchCompat mod_alert, no_alert;
+    EditText time_mod_to, time_mod_from;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_today, container, false);
+        View view = inflater.inflate(R.layout.fragment_mode_config, container, false);
 
-        switch_button = view.findViewById(R.id.switch_vigilance);
-        switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if (vig_on) {
-                    vig_on = false;
-                }
-                else
-                {
-                    vig_on=true;
-                }
-                Log.d("isTouched!!!!!!!)!)! = ", String.valueOf(vig_on));
-            }
-        });
+        mod_alert = view.findViewById(R.id.switch_moderate);
+        no_alert = view.findViewById(R.id.switch_noalert);
+
+        time_mod_from = view.findViewById(R.id.mod_from);
+        time_mod_to = view.findViewById(R.id.mod_to);
 
 
-        vig_from = view.findViewById(R.id.vig_from);
-        vig_to = view.findViewById(R.id.vig_to);
 
-        vig_from.setOnClickListener(new View.OnClickListener() {
+        time_mod_from.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -68,9 +47,9 @@ public class TodayFragment extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         if(selectedMinute==00){
-                            vig_from.setText( selectedHour + ":" + selectedMinute+0);
+                            time_mod_from.setText( selectedHour + ":" + selectedMinute+0);
                         }else {
-                            vig_from.setText(selectedHour + ":" + selectedMinute);
+                            time_mod_from.setText(selectedHour + ":" + selectedMinute);
                         }
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -80,7 +59,7 @@ public class TodayFragment extends Fragment {
             }
         });
 
-        vig_to.setOnClickListener(new View.OnClickListener() {
+        time_mod_to.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -93,9 +72,9 @@ public class TodayFragment extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         if(selectedMinute==00){
-                            vig_to.setText( selectedHour + ":" + selectedMinute+0);
+                            time_mod_from.setText( selectedHour + ":" + selectedMinute+0);
                         }else {
-                            vig_to.setText(selectedHour + ":" + selectedMinute);
+                            time_mod_from.setText(selectedHour + ":" + selectedMinute);
                         }
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -104,9 +83,14 @@ public class TodayFragment extends Fragment {
 
             }
         });
-
 
 
         return view;
+    }
+
+
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new SettingsFragment()).commit();
     }
 }
