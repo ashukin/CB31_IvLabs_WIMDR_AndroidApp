@@ -7,8 +7,15 @@
 <p align="center">
   <img width="200" height="200" src="images/Falcon_Vision_logo.jpg">
 </p>
-
 This is the implementation of the android app for Smart India Hackathon (Software Edition 2020). The [problem statement](https://sih2020.sih.gov.in/nodal-centers/prin-l-n-welingkar-institute-of-management-development-research-weschool/) demands the automation of number plate detection, identification and monitoring in different scenarios.
+
+**Real time Implementation**: [Google Drive](https://drive.google.com/file/d/1v1akjvle2rp9KxP0MkASVxgWkcBIhED2/view?usp=sharing)
+
+#### Technology Stack
+
+* Android Studio
+* Firebase
+* Google Services
 
 ## Salient Features
 
