@@ -1,10 +1,12 @@
 package com.example.falcon_vision;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -52,6 +54,8 @@ public class TodayFragment extends Fragment {
     TextView new_places;
     TextView park_cost;
 
+    CardView places_card;
+
     TextInputLayout vig_layout, vig_layout_2;
     String car_2,car,car_num;
     String car_num_2;
@@ -60,6 +64,9 @@ public class TodayFragment extends Fragment {
     FirebaseFirestore fstore;
     FirebaseUser user;
     String userID;
+    int cost;
+
+
 
 
 //    @Override
@@ -68,6 +75,11 @@ public class TodayFragment extends Fragment {
 //
 //
 //    }
+
+    public void deductMoney(int money){
+        cost-=money;
+        park_cost.setText("Rs"+ String.valueOf(cost));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +94,8 @@ public class TodayFragment extends Fragment {
         new_places = view.findViewById(R.id.new_places);
         park_cost = view.findViewById(R.id.park_cost);
 
+        places_card = view.findViewById(R.id.card_3);
+
         vig_text = view.findViewById(R.id.vig_text);
         spinner = view.findViewById(R.id.spinner);
 
@@ -95,6 +109,16 @@ public class TodayFragment extends Fragment {
         fstore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
         user = mAuth.getCurrentUser();
+
+        park_cost.setText("0");
+
+        places_card.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Logs.class));
+            }
+        });
 
         final DocumentReference documentReference = fstore.collection("reg_users").document(userID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
