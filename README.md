@@ -21,19 +21,19 @@ This is the implementation of the android app for Smart India Hackathon (Softwar
 
 ### Registration Portal
 
-![registration](images/registration.png)
+![registration](images/8.png) ![back](images/7.png)
 
 An interactive registration portal, so the user can register his/he vehicle and link with the email - id. The user is required to input the vehicle model, registration plate number as well as the date of purchase. A small image database is also maintained for a car as proof as well as can be used as a dataset.
 
 ### Dashboard
 
-![dashboard](images/dashboard.png) 
+![dashboard](images/4.png) ![about](images/5.png)
 
 We have an interactive dashboard, displaying the overall statistics of the user's car, involving places visited, new places, places visited as well as the total parking cost made by the user. There is an option of vigilance mode, which activates notification on the user's app in case of any activity (known or unknown). The upper right clock indicates the activity log.
 
 ### Quick Registration and Payment
 
-![QR code](images/qr_payment.png)
+![QR code](images/3.png)
 
 We provide an easy and quick solution, for registration of the car to the society's database, by just scanning the QR code.
 
@@ -41,19 +41,17 @@ In case of payment at the entry, the user can use Unified Payments Interface (UP
 
 ### Adding Another Vehicle
 
-![options](images/add_vehicle.png)
+![options](images/6.png) ![settings](images/2.png)
 
 One user can also register more than one vehicle if he/she possesses.
 
 ### Society Notices 
 
-![notice](images/notices.png)
+![notice](images/1.png)
 
 There is an option to check any important notices added by society.
 
 ### Mode Configuration
-
-![modes](images/conf_mode.png)
 
 The user can set alert priority for their vehicles, such as a moderate alert for only important notifications or no alert in case he/she do not want to be disturbed.
 
