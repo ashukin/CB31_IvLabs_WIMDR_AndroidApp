@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
@@ -24,6 +27,9 @@ public class ModeConfigFragment extends Fragment {
     EditText time_mod_to, time_mod_from;
     static Boolean mod_on = false, no_alert_on = false;
 
+    TextInputLayout mod_from_lay, mod_to_lay;
+    TextView mod_text;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +39,10 @@ public class ModeConfigFragment extends Fragment {
         mod_alert = view.findViewById(R.id.switch_moderate);
         no_alert = view.findViewById(R.id.switch_noalert);
 
+        mod_text = view.findViewById(R.id.mod_text);
+        mod_from_lay = view.findViewById(R.id.mod_from_layout);
+        mod_to_lay = view.findViewById(R.id.mod_to_layout);
+
         mod_alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
@@ -40,10 +50,16 @@ public class ModeConfigFragment extends Fragment {
             {
                 if (mod_on) {
                     mod_on = false;
+                    mod_text.setVisibility(View.GONE);
+                    mod_from_lay.setVisibility(View.GONE);
+                    mod_to_lay.setVisibility(View.GONE);
                 }
                 else
                 {
                     mod_on=true;
+                    mod_text.setVisibility(View.VISIBLE);
+                    mod_from_lay.setVisibility(View.VISIBLE);
+                    mod_to_lay.setVisibility(View.VISIBLE);
                     if(no_alert_on){
                         no_alert.toggle();
                     }

@@ -148,7 +148,7 @@ public class AddCarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String veh_dop_2 = v_dop.getText().toString();
                 final String veh_model_2 = v_model.getText().toString();
-                final String veh_num_2 = v_num.getText().toString();
+                final String veh_num_2 = v_num.getText().toString().toUpperCase();
 
 
 //                userID = firebaseAuth.getCurrentUser().getUid();

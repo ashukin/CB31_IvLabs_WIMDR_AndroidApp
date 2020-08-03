@@ -11,12 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,7 +29,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -36,15 +42,32 @@ public class TodayFragment extends Fragment {
 
     SwitchCompat switch_button;
     EditText vig_from, vig_to;
+    Spinner spinner;
     static Boolean vig_on = false;
 
-    TextView dist, avg_dist, places_vis, most_vis, new_places, park_cost, car, car_num;
+    TextView dist, vig_text;
+    TextView avg_dist;
+    TextView places_vis;
+    TextView most_vis;
+    TextView new_places;
+    TextView park_cost;
+
+    TextInputLayout vig_layout, vig_layout_2;
+    String car_2,car,car_num;
+    String car_num_2;
 
     FirebaseAuth mAuth;
     FirebaseFirestore fstore;
     FirebaseUser user;
     String userID;
 
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,8 +82,14 @@ public class TodayFragment extends Fragment {
         new_places = view.findViewById(R.id.new_places);
         park_cost = view.findViewById(R.id.park_cost);
 
-        car = view.findViewById(R.id.today_car);
-        car_num = view.findViewById(R.id.today_car_num);
+        vig_text = view.findViewById(R.id.vig_text);
+        spinner = view.findViewById(R.id.spinner);
+
+        vig_layout = view.findViewById(R.id.vig_layout);
+        vig_layout_2=view.findViewById(R.id.vig_layout_to);
+
+//        car = view.findViewById(R.id.today_car);
+//        car_num=view.findViewById(R.id.today_car_num);
 
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
@@ -72,13 +101,33 @@ public class TodayFragment extends Fragment {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
 
-                car.setText(documentSnapshot.getString("veh_model"));
-                car_num.setText(documentSnapshot.getString("veh_num"));
+                car = documentSnapshot.getString("veh_model");
+                car_num=documentSnapshot.getString("veh_num");
+
+                car_2 = documentSnapshot.getString("veh_model_2");
+                car_num_2=documentSnapshot.getString("veh_num_2");
+
+                List<String> list = new ArrayList<String>();
+                list.add(car + "\n"+ car_num);
+                list.add(car_2 + "\n"+ car_num_2);
+
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.multiline_spinner_row, list);
+                dataAdapter.setDropDownViewResource(R.layout.multiline_spinner_row);
+                spinner.setAdapter(dataAdapter);
 
             }
         });
 
+//        List<String> list = new ArrayList<String>();
+////        list.add(car + "\n" + car_num);
+//        list.add(car_2 + "\n"+ car_num_2);
+//
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.multiline_spinner_row, list);
+//        dataAdapter.setDropDownViewResource(R.layout.multiline_spinner_row);
+//        spinner.setAdapter(dataAdapter);
+
         switch_button = view.findViewById(R.id.switch_vigilance);
+
         switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
@@ -86,10 +135,16 @@ public class TodayFragment extends Fragment {
             {
                 if (vig_on) {
                     vig_on = false;
+                    vig_text.setVisibility(View.GONE);
+                    vig_layout.setVisibility(View.GONE);
+                    vig_layout_2.setVisibility(View.GONE);
                 }
                 else
                 {
                     vig_on=true;
+                    vig_text.setVisibility(View.VISIBLE);
+                    vig_layout.setVisibility(View.VISIBLE);
+                    vig_layout_2.setVisibility(View.VISIBLE);
                 }
                 Log.d("isTouched!!!!!!!)!)! = ", String.valueOf(vig_on));
             }

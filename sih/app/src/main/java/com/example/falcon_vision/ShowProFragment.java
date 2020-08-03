@@ -84,8 +84,14 @@ public class ShowProFragment extends Fragment {
                 pro_email.setText(documentSnapshot.getString("email"));
                 pro_v_type.setText(documentSnapshot.getString("veh_model"));
                 pro_v_num.setText(documentSnapshot.getString("veh_num").toUpperCase());
-                pro_v_type_2.setText(documentSnapshot.getString("veh_model_2"));
-                pro_v_num_2.setText(documentSnapshot.getString("veh_num_2").toUpperCase());
+
+                if(documentSnapshot.getString("veh_model_2")!=null || documentSnapshot.getString("veh_num_2")!=null){
+                    pro_v_type_2.setText(documentSnapshot.getString("veh_model_2"));
+                    pro_v_num_2.setText(documentSnapshot.getString("veh_num_2").toUpperCase());
+                }else {
+                    pro_v_type_2.setText("-");
+                    pro_v_num_2.setText("-");
+                }
 
             }
         });

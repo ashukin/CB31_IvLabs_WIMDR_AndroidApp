@@ -117,7 +117,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 final String veh_dop = v_dop.getText().toString();
                 final String veh_model = v_model.getText().toString();
-                veh_num = v_num.getText().toString();
+                veh_num = v_num.getText().toString().toUpperCase();
 
                 userID = firebaseAuth.getCurrentUser().getUid();
 
