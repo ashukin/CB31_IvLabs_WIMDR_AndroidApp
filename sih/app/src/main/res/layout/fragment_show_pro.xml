@@ -134,7 +134,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vehicle"
+                android:text="Vehicle (1)"
                 android:textColor="@color/headings"
                 android:textSize="15sp" />
 
@@ -158,7 +158,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vehicle Number"
+                android:text="Vehicle Number (1)"
                 android:textColor="@color/headings"
                 android:textSize="15sp" />
 
@@ -172,6 +172,55 @@
                 android:textSize="18sp"
                 android:paddingBottom="15dp"/>
         </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle (2)"
+                    android:textColor="@color/headings"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/show_pro_v_type_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:paddingBottom="15dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Number (2)"
+                    android:textColor="@color/headings"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/show_pro_v_num_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:paddingBottom="15dp"/>
+            </LinearLayout>
+
 
         </LinearLayout>
 

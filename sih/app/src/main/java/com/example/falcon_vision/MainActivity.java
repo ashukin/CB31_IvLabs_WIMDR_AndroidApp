@@ -33,6 +33,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseFirestore fstore;
     SharedPreferences sp;
 
+    Map<String,Object> user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         firebaseAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+
+        user = (Map<String, Object>) getIntent().getSerializableExtra("key");
 
         userID = firebaseAuth.getCurrentUser().getUid();
         Toolbar toolbar = findViewById(R.id.toolbar);

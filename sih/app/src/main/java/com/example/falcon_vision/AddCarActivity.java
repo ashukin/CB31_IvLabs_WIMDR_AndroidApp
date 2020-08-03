@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,15 +27,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,18 +51,21 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class RegisterActivity2 extends AppCompatActivity {
+public class AddCarActivity extends AppCompatActivity {
 
     private static final String TAG = "test";
     private static final int CHOOSE_IMAGE =101 ;
+    private DatabaseReference reff;
 
     Uri uriProfileImage;
     EditText v_model, v_num, v_dop;
-    ImageView signup, car_f,car_b,num_plate;
-    TextView login;
+    ImageView  car_f,car_b,num_plate;
+
+    Button save;
     String userID;
     int i =0, c=0;
-    String veh_num;
+
+    String veh_num, phone, name, email, veh_model,  veh_dop, pwd;
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore fstore;
@@ -65,23 +76,24 @@ public class RegisterActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
+        setContentView(R.layout.activity_add_car);
 
-        v_model=findViewById(R.id.car_model);
-        v_num = findViewById(R.id.car_num);
-        v_dop = findViewById(R.id.car_dop);
-        car_f = findViewById(R.id.car_front);
-        car_b = findViewById(R.id.car_back);
-        num_plate=findViewById(R.id.car_num_plate);
+        v_model=findViewById(R.id.add_car_model);
+        v_num = findViewById(R.id.add_car_num);
+        v_dop = findViewById(R.id.add_car_dop);
+        car_f = findViewById(R.id.add_car_front);
+        car_b = findViewById(R.id.add_car_back);
+        num_plate=findViewById(R.id.add_car_num_plate);
 
-        signup = findViewById(R.id.register_2);
-        login = findViewById(R.id.login_link);
+        save = findViewById(R.id.save_car);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
-        final Map<String,Object> user = (Map<String, Object>) getIntent().getSerializableExtra("key");
+        userID = firebaseAuth.getCurrentUser().getUid();
+
+//        final Map<String,Object> user = (Map<String, Object>) getIntent().getSerializableExtra("key");
 
         car_f.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,25 +124,98 @@ public class RegisterActivity2 extends AppCompatActivity {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        userID = firebaseAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = fstore.collection("reg_users").document(userID);
+        final Map<String,Object> user = new HashMap<>();
+
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                phone = documentSnapshot.getString("phone");
+                name = documentSnapshot.getString("name");
+                email = documentSnapshot.getString("email");
+                veh_model = documentSnapshot.getString("veh_model");
+                veh_num=documentSnapshot.getString("veh_num");
+                veh_dop=documentSnapshot.getString("veh_dop");
+                pwd=documentSnapshot.getString("pwd");
+
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String veh_dop = v_dop.getText().toString();
-                final String veh_model = v_model.getText().toString();
-                veh_num = v_num.getText().toString();
+                final String veh_dop_2 = v_dop.getText().toString();
+                final String veh_model_2 = v_model.getText().toString();
+                final String veh_num_2 = v_num.getText().toString();
 
-                userID = firebaseAuth.getCurrentUser().getUid();
 
+//                userID = firebaseAuth.getCurrentUser().getUid();
                 DocumentReference documentReference = fstore.collection("reg_users").document(userID);
+//                final Map<String,Object> user = new HashMap<>();
 
-                user.put("veh_model",veh_model);
-                user.put("veh_num",veh_num);
-                user.put("veh_dop",veh_dop);
+//                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+//
+//                        phone = documentSnapshot.getString("phone");
+//                        name = documentSnapshot.getString("name");
+//                        email = documentSnapshot.getString("email");
+//                        veh_model = documentSnapshot.getString("veh_model");
+//                        veh_num=documentSnapshot.getString("veh_num");
+//                        veh_dop=documentSnapshot.getString("veh_dop");
+//                        pwd=documentSnapshot.getString("pwd");
+//
+//                    }
+//                });
+
+//                reff = FirebaseDatabase.getInstance().getReference();
+////                DatabaseReference userRef = ref.child("reg_users").child(userID).push();
+////                String key = userRef.getKey();
+
+                user.put("phone", phone);
+                user.put("name", name);
+                user.put("email", email);
+                user.put("veh_model", veh_model);
+                user.put("veh_num", veh_num);
+                user.put("veh_dop", veh_dop);
+                user.put("pwd", pwd);
+                user.put("veh_model_2",veh_model_2);
+                user.put("veh_num_2",veh_num_2);
+                user.put("veh_dop_2",veh_dop_2);
+
+//                reff.child("reg_users").child(userID)
+//                        .addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange (DataSnapshot dataSnapshot) {
+//                                    Map<String, Object> postValues = new HashMap<String,Object>();
+//                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                                        postValues.put(snapshot.getKey(),snapshot.getValue());
+//                                    }
+//                                    postValues.put("veh_model_2",veh_model_2);
+//                                    postValues.put("veh_num_2",veh_num_2);
+//                                    postValues.put("veh_dop_2",veh_dop_2);
+//                                    reff.child("reg_users").child(userID).updateChildren(postValues);
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(DatabaseError databaseError) {}
+//                            }
+//                        );
+
+//                ref.child("reg_users").child(userID).child("veh_model_2").setValue(veh_model_2);
+//                ref.child("reg_users").child(userID).child("veh_num_2").setValue(veh_num_2);
+//                ref.child("reg_users").child(userID).child("veh_dop_2").setValue(veh_dop_2);
+
+
+
+
 
                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "SUCCESS! USER PROFILE IS CREATED FOR"+userID);
+                        Log.d(TAG, "SUCCESS! USER PROFILE IS CREATED FOR)))"+userID);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -142,14 +227,12 @@ public class RegisterActivity2 extends AppCompatActivity {
 
                 if(c==3) {
 
-                    Intent i = new Intent(RegisterActivity2.this, MainActivity.class);
-                    i.putExtra( "key", (Serializable) user);
-                    startActivity(i);
-
-                    Toast.makeText(RegisterActivity2.this, "Registered Successfully",
+                    getSupportFragmentManager().beginTransaction()
+                            .add(android.R.id.content, new SettingsFragment ()).commit();
+                    Toast.makeText(AddCarActivity.this, "Registered Successfully",
                             Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(RegisterActivity2.this, "Upload all the images to register",
+                    Toast.makeText(AddCarActivity.this, "Upload all the images to register",
                             Toast.LENGTH_LONG).show();
                 }
 
@@ -157,15 +240,10 @@ public class RegisterActivity2 extends AppCompatActivity {
 
 
             }
+
+
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity2.this,LoginActivity.class));
-//                finish();
-            }
-        });
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -187,7 +265,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(RegisterActivity2.this, date, myCalendar
+                new DatePickerDialog(AddCarActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -197,13 +275,6 @@ public class RegisterActivity2 extends AppCompatActivity {
 
     }
 
-    public void onBackPressed(){
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -255,7 +326,7 @@ public class RegisterActivity2 extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegisterActivity2.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddCarActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }

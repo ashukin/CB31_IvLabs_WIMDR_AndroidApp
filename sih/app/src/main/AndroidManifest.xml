@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/falcon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Scanner"></activity>
+        <activity android:name=".AddCarActivity"></activity>
+        <activity android:name=".Scanner" />
         <activity android:name=".RegisterActivity2" />
         <activity
             android:name=".HomeActivity"
@@ -31,8 +32,9 @@
             android:name=".PaymentsActivity"
             android:theme="@style/AppTheme.CustomTheme" />
 
-        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode"></meta-data>
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
     </application>
 
 </manifest>

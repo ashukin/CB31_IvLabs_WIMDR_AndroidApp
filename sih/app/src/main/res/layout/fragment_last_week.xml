@@ -43,19 +43,21 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/last_w_car"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Maruti Suzuki Dzire"
-                        android:textSize="20sp"
+                        android:text="-"
+                        android:textSize="18sp"
                         android:paddingLeft="20dp"/>
                     <TextView
+                        android:id="@+id/last_w_c_num"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="MH 13 CD 0096"
+                        android:text="-"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:paddingLeft="20dp"/>
                 </LinearLayout>
 
